@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+  		<h1><b>Admin</b> Page</h1>
+  		<p>List of User.</p> 
+  		
+  		<!-- List of user -->
+		<div class="panel-group" tyle="margin-top:40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span th:utext="${userName}"></span>
+				</div>
+				
+				<div class="panel-body">
+					<div class="table">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Nama</t>
+									<th>Email</th>
+									<th>Role</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="user,iterStat : ${users}">
+									<td th:text="${iterStat.index}+1"></td>
+									<td th:text="${user.name}"></td>
+									<td th:text="${user.email}"></td>
+									<td th:text="${user.roles.role}"></td>
+									<td>
+										<div class="btn-group">
+  											<a href="#" th:href="@{'/admin/edit'(id=${user.id})}" class="btn btn-info">Edit</a>
+  											<a href="#" th:href="@{'/admin/delete'(id=${user.id})}" class="btn btn-primary">Delete</a>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+  		<!-- List of user -->
+  		
+  		<!-- Logout button -->	
+		<form th:action="@{/logout}" method="get">
+			<button class="btn btn-md btn-danger btn-block" name="registration"
+				type="Submit">Logout</button>
+		</form>    
+		<!-- Logout button -->
+	</div>	
+</body>
+</html>
